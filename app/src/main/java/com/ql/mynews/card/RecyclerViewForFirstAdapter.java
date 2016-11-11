@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ql.mynews.R;
 import com.ql.mynews.bitmap.DownImage;
 import com.ql.mynews.bitmap.ImageLoader;
+import com.ql.mynews.utils.NewsAllBean;
 import com.ql.mynews.utils.NewsOtherBean;
 import com.ql.mynews.web.WebViewActivity;
 
@@ -27,11 +28,11 @@ import java.util.List;
  */
 public class RecyclerViewForFirstAdapter extends RecyclerView.Adapter<RecyclerViewForFirstAdapter.NewsViewHolder> {
 
-    private List<NewsOtherBean> newses = new ArrayList<NewsOtherBean>();
+    private List<NewsAllBean> newses = new ArrayList<NewsAllBean>();
     private Context context;
     public ImageLoader imageLoader; // 用来下载图片的类，后面有介绍
 
-    public RecyclerViewForFirstAdapter(List<NewsOtherBean> newses, Context context) {
+    public RecyclerViewForFirstAdapter(List<NewsAllBean> newses, Context context) {
         this.newses = newses;
         this.context = context;
         imageLoader = new ImageLoader(context);

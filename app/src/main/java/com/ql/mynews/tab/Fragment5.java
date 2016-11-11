@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 
 import com.ql.mynews.R;
 import com.ql.mynews.adapter.NewsOtherListAdapter;
+import com.ql.mynews.card.RecyclerViewAdapter;
 import com.ql.mynews.http.HttpConst;
 import com.ql.mynews.http.Https;
 import com.ql.mynews.utils.NewsAllBean;
@@ -23,27 +26,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment5 extends Fragment implements AdapterView.OnItemClickListener {
-    private WeakReference<View> v;
-
+    private View v;
+//
     private List<NewsOtherBean> list = new ArrayList<NewsOtherBean>();
-    private NewsOtherListAdapter adapter;
-    private ListView listview_;
+//    private NewsOtherListAdapter adapter;
+//    private ListView listview_;
 
+    private RecyclerView recyclerView;
+    private List<NewsOtherBean> newsList;
+    private RecyclerViewAdapter adapter;
+    LinearLayoutManager layoutManager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (v == null || v.get() == null) {
-            View view=inflater.inflate(R.layout.fragment5, null);
-            v = new WeakReference<View>(view);
-        } else {
-            ViewGroup parent = (ViewGroup) v.get().getParent();
-            if (parent != null) {
-                parent.removeView(v.get());
-            }
-        }
-//        v = inflater.inflate(R.layout.fragment5, null);
-        listview_ = (ListView) v.get().findViewById(R.id.listview_five);
-        listview_.setOnItemClickListener(this);
+        v = inflater.inflate(R.layout.fragment5, null);
+
+        recyclerView= (RecyclerView) v.findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
         new Thread(new Runnable() {
 
             @Override
@@ -53,7 +54,7 @@ public class Fragment5 extends Fragment implements AdapterView.OnItemClickListen
             }
         }).start();
 
-        return v.get();
+        return v;
     }
 
     private Handler myHandler = new Handler() {
@@ -65,8 +66,13 @@ public class Fragment5 extends Fragment implements AdapterView.OnItemClickListen
 
                     } else {
                         list = (List<NewsOtherBean>) msg.obj;
-                        adapter = new NewsOtherListAdapter(getActivity(), list);
-                        listview_.setAdapter(adapter);
+//                        adapter = new NewsOtherListAdapter(getActivity(), list);
+//                        listview_.setAdapter(adapter);
+                        adapter=new RecyclerViewAdapter(list,getActivity());
+
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setAdapter(adapter);
+
                     }
                     break;
 

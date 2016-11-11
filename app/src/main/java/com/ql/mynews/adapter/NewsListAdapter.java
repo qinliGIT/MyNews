@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.ql.mynews.R;
 import com.ql.mynews.bitmap.ImageLoader;
-import com.ql.mynews.http.DownImage;
+import com.ql.mynews.bitmap.DownImage;
 import com.ql.mynews.utils.NewsAllBean;
 
 import java.util.ArrayList;

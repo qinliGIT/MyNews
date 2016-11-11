@@ -9,10 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ql.mynews.R;
 import com.ql.mynews.bitmap.ImageLoader;
-import com.ql.mynews.http.DownImage;
-import com.ql.mynews.utils.NewsAllBean;
+import com.ql.mynews.bitmap.DownImage;
 import com.ql.mynews.utils.NewsOtherBean;
 
 import java.util.ArrayList;
